@@ -113,7 +113,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                com.mutere.sufeeds.busreservation/com.mutere.sufeeds.busreservation.HelloApplication
+                                com.mutere.sufeeds.busreservation/com.busreservation.HelloApplication
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>

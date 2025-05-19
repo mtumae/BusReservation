@@ -1,4 +1,4 @@
-package com.mutere.sufeeds.busreservation;
+package com.busreservation;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

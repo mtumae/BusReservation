@@ -9,6 +9,6 @@ module com.mutere.sufeeds.busreservation {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
 
-    opens com.mutere.sufeeds.busreservation to javafx.fxml;
-    exports com.mutere.sufeeds.busreservation;
+    opens com.busreservation to javafx.fxml;
+    exports com.busreservation;
 }

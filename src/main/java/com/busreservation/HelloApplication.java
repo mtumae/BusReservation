@@ -1,4 +1,4 @@
-package com.mutere.sufeeds.busreservation;
+package com.busreservation;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -16,7 +16,7 @@ public class HelloApplication extends Application {
         stage.setScene(scene);
         stage.show();
     }
-
+//comment test
     public static void main(String[] args) {
         launch();
     }
