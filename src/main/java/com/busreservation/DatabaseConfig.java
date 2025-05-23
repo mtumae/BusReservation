@@ -14,7 +14,6 @@ public class DatabaseConfig {
                 System.out.println("Sorry, unable to find db.properties");
                 System.exit(1);
             }
-
             // Load the properties file
             properties.load(input);
         } catch (IOException e) {
@@ -23,7 +22,6 @@ public class DatabaseConfig {
     }
 
     public static String getDbUrl() {
-
         return properties.getProperty("db.url");
     }
 

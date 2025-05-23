@@ -8,6 +8,8 @@ module com.mutere.sufeeds.busreservation {
     requires net.synedra.validatorfx;
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
+    requires java.sql;
+    requires java.desktop;
 
     opens com.busreservation to javafx.fxml;
     exports com.busreservation;

@@ -1,14 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
+<?xml-stylesheet type="text/css" href="style.css"?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.busreservation.Dashboard"
-            prefHeight="400.0" prefWidth="600.0">
+<SplitPane dividerPositions="0.21149553571428573" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.busreservation.Dashboard">
+  <items>
+    <AnchorPane depthTest="DISABLE" minHeight="0.0" minWidth="0.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="397.0" prefWidth="50.0">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <Button layoutX="36.0" layoutY="101.0" mnemonicParsing="false" onAction="#switchtoProfile" text="Profile" />
+         <Button layoutX="31.0" layoutY="145.0" mnemonicParsing="false" text="Settings" />
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+    </AnchorPane>
 
-</AnchorPane>
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="397.0" prefWidth="440.0">
+          <Label layoutX="44.0" layoutY="14.0" text="Map">
+            <font>
+               <Font name="Inter Semi Bold" size="24.0" />
+            </font></Label>
+         <ImageView fitHeight="163.0" fitWidth="414.0" layoutX="44.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="54.0">
+            <image>
+               <Image fx:id="image_box" url="@images/westgate.png" />
+            </image>
+            <effect>
+               <DropShadow />
+            </effect></ImageView>
+         <Button layoutX="44.0" layoutY="246.0" mnemonicParsing="false" text="Change location" />
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </AnchorPane>
+  </items>
+</SplitPane>

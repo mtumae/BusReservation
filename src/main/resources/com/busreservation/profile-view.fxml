@@ -1,14 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="$CONTROLLER_NAME$"
-            prefHeight="400.0" prefWidth="600.0" >
+<SplitPane dividerPositions="0.21149553571428573" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.busreservation.Dashboard">
+    <items>
+    <AnchorPane depthTest="DISABLE" minHeight="0.0" minWidth="0.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="397.0" prefWidth="50.0">
+        <opaqueInsets>
+            <Insets />
+        </opaqueInsets>
+        <Button layoutX="36.0" layoutY="101.0" mnemonicParsing="false" onAction="#switchtoProfile" text="Profile" />
+        <Button layoutX="31.0" layoutY="145.0" mnemonicParsing="false" text="Settings" />
 
-</AnchorPane>
+    </AnchorPane>
+
+        <AnchorPane>
+         <children>
+            <Circle fill="WHITE" layoutX="39.0" layoutY="80.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label layoutX="71.0" layoutY="55.0" text="First Name Last name">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="71.0" layoutY="90.0" text="Student" />
+            <TableView layoutX="82.0" layoutY="158.0" prefHeight="200.0" prefWidth="303.0">
+              <columns>
+                <TableColumn prefWidth="75.0" text="Date" />
+                <TableColumn prefWidth="75.0" text="Stage" />
+                  <TableColumn prefWidth="75.0" text="Bus/Seat" />
+                  <TableColumn prefWidth="75.0" text="Time" />
+              </columns>
+            </TableView>
+            <Button layoutX="360.0" layoutY="68.0" mnemonicParsing="false" text="Button" />
+         </children></AnchorPane>
+    </items>
+</SplitPane>
