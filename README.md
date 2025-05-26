@@ -9,6 +9,7 @@ A JavaFX-based desktop application for managing bus reservations. Users can log 
 - Ticket booking functionality
 - User profile management
 - Administrative controls for bus and route management
+- **Build tool**:Maven
 
 ##  Technologies Used
 
@@ -23,7 +24,7 @@ A JavaFX-based desktop application for managing bus reservations. Users can log 
 - Java Development Kit (JDK)
 - Apache Maven
 
-##  Getting Started
+##  Installation and setup
 
 1. **Clone the repository:**
    ```bash
