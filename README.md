@@ -17,6 +17,11 @@ A JavaFX-based desktop application for managing bus reservations. Users can log 
 - FXML for UI layouts
 - CSS for styling
 - PostgreSQL for data persistence
+- Maven for project management and dependency management.
+
+## Prerequisites
+- Java Development Kit (JDK)
+- Apache Maven
 
 ##  Getting Started
 
