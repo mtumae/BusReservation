@@ -8,11 +8,11 @@ public class DB {
     public static Connection connect() throws SQLException {
         try {
             // Get database credentials from DatabaseConfig class
-            var jdbcUrl = "";
-            var user = "";
-            var password = "";
+            var jdbcUrl = "jdbc:postgresql://localhost:5432/postgres";
+            var user = "postgres";
+            var password = "admin123";
             // Open a connection
-            return DriverManager.getConnection(jdbcUrl, user, password);
+            return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "admin123");
         } catch (SQLException  e) {
             System.err.println(e.getMessage());
             return null;
