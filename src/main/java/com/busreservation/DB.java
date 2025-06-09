@@ -1,34 +1,23 @@
 package com.busreservation;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
 
-
-public class DB {
-    public static Connection connect() throws SQLException {
+public class DB{
+    public Connection connect_to_db(String dbname, String user, String pass) {
+        Connection conn = null;
         try {
-            // Get database credentials from DatabaseConfig class
-            var jdbcUrl = "";
-            var user = "";
-            var password = "";
-            // Open a connection
-            return DriverManager.getConnection(jdbcUrl, user, password);
-        } catch (SQLException  e) {
-            System.err.println(e.getMessage());
-            return null;
+            Class.forName("org.postgresql.Driver");
+            conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/" + dbname, user, pass);
+            if (conn != null) {
+                System.out.println("Connection established");
+            } else {
+                System.out.println("Connection Failed");
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
         }
-    }
-}
-
-
-
-class Main {
-    public static void main(String[] args){
-
-        try (var connection =  DB.connect()){
-            System.out.println("Connected to the PostgreSQL database.");
-        } catch (SQLException e) {
-            System.err.println(e.getMessage());
-        }
+        return conn;
     }
 }
