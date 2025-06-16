@@ -16,12 +16,11 @@ public class Dashboard extends Application{
     private Scene scene;
 
     public void switchtoProfile(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("profile-view.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("profile-view.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setTitle("Profile");
         stage.getScene().setRoot(root);
     }
-
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -33,7 +32,4 @@ public class Dashboard extends Application{
         stage.setScene(scene);
         stage.show();
     }
-
-
-
 }
