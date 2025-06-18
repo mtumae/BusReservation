@@ -35,7 +35,6 @@ public class Register extends Home{
     public void Dashboard(ActionEvent event) throws IOException {
         super.Dashboard(event);
     }
-
     public void RegisterButtonClick(ActionEvent event) throws IOException {
         //validation
         if (Objects.equals(ad_no.getText(), "") || Objects.equals(pass1.getText(), "") || Objects.equals(name.getText(), "")){

@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -25,6 +26,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -75,9 +77,11 @@ public class Home extends Application {
         Image bus_coaster = new Image(Objects.requireNonNull(getClass().getResourceAsStream("coaster.jpg")));
         Image big_bus = new Image(Objects.requireNonNull(getClass().getResourceAsStream("bigbus.jpeg")));
 
+
         //Icons
         Image houseIcon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("house.png")));
         Image userIcon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("user.png")));
+        Image saveIcon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("save.png")));
 
 
         //Arrays
@@ -94,14 +98,14 @@ public class Home extends Application {
         System.out.println("Initialized array list: "+res);
 
         //components
-        HBox layout = new HBox(5);
-
+        HBox layout = new HBox(10);
         StackPane stackp = new StackPane();
         HBox cardContainer = new HBox(5);
-
         VBox cardDescription = new VBox(5);
         VBox resDescription = new VBox(5);
         HBox time_container = new HBox(5);
+        Button dbcheck = new Button("Db check");
+        Button savebtn = new Button("Save");
         Button adminbtn = new Button("");
         Button profilebtn = new Button("");
         Button homebtn = new Button("");
@@ -129,6 +133,7 @@ public class Home extends Application {
         ImageView bus1 = new ImageView(bus_coaster);
         ImageView houseI = new ImageView(houseIcon);
         ImageView userI = new ImageView(userIcon);
+        ImageView saveI = new ImageView(saveIcon);
 
 
         //styling, layout
@@ -137,6 +142,7 @@ public class Home extends Application {
         //layout.setStyle("-fx-background-color: #101820;");
 
         navbar.setPadding(new Insets(20));
+        layout.setPadding(new Insets(10));
         resDescription.setPadding(new Insets(20));
         container.setPadding(new Insets(20));
         locationselector.setStyle("-fx-background-color: white;");
@@ -144,6 +150,11 @@ public class Home extends Application {
         adminbtn.setStyle("-fx-background-color: #030f0f; -fx-text-fill: white");
         profilebtn.setStyle("-fx-background-color: #030f0f; -fx-text-fill: white");
         homebtn.setStyle("-fx-background-color: #030f0f; -fx-text-fill: white");
+        savebtn.setStyle("-fx-background-color: #030f0f; -fx-text-fill: white");
+        adminbtn.setCursor(Cursor.HAND);
+        profilebtn.setCursor(Cursor.HAND);
+        homebtn.setCursor(Cursor.HAND);
+        savebtn.setCursor(Cursor.HAND);
 
 
         //navbar.setStyle("-fx-background-color:#03624c;");
@@ -180,21 +191,18 @@ public class Home extends Application {
         houseI.setFitWidth(20);
         userI.setFitWidth(20);
         userI.setFitHeight(20);
+        saveI.setFitWidth(20);
+        saveI.setFitHeight(20);
 
         selectorMenu.setMaxWidth(300);
         selectorMenu.setMaxHeight(50);
         bustext.setWrappingWidth(600);
 
-
-
         cardDescription.setPrefHeight(100);
         cardDescription.setPrefWidth(100);
 
-
         bus1.setFitWidth(190);
         bus1.setFitHeight(120);
-
-
 
         //Selectors
         locationselector.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
@@ -253,6 +261,12 @@ public class Home extends Application {
             }
         });
 
+        dbcheck.setOnAction(e->{
+            DB db = new DB();
+            Connection conn = db.connect_to_db("Bus-Reservation-System", "postgres", "");
+            db.getBus(conn, e);
+        });
+
 
         //loops to populate components
         for(int i =0; i<times.length;i++){
@@ -293,14 +307,15 @@ public class Home extends Application {
 
 
         //children
-        resDescription.getChildren().addAll(restext, locationlbl, seatlbl, timelbl);
+        savebtn.setGraphic(saveI);
+        resDescription.getChildren().addAll(restext, locationlbl, seatlbl, timelbl, savebtn);
         homebtn.setGraphic(houseI);
         profilebtn.setGraphic(userI);
         busheader.getChildren().addAll(buslbl, bookbus);
         cardDescription.getChildren().addAll(busheader, rating, bustext);
         cardContainer.getChildren().addAll(bus1, cardDescription);
 
-        navbar.getChildren().addAll(adminbtn, profilebtn, homebtn);
+        navbar.getChildren().addAll(adminbtn, profilebtn, homebtn, dbcheck);
 
 
 

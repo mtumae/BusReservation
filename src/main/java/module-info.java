@@ -10,6 +10,7 @@ module com.mutere.sufeeds.busreservation {
     requires eu.hansolo.tilesfx;
     requires java.sql;
     requires java.desktop;
+    requires org.postgresql.jdbc;
 
     opens com.busreservation to javafx.fxml;
     exports com.busreservation;
