@@ -5,11 +5,9 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -34,6 +32,31 @@ import java.util.Objects;
 public class Home extends Application {
     private Stage stage;
     private Scene scene;
+    Image dashIcon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("circuit-board.png")));
+    Image circleuserIcon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("circle-user.png")));
+    Image houseIcon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("house.png")));
+    Image userIcon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("user.png")));
+    Image saveIcon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("save.png")));
+    Image westgate = new Image(Objects.requireNonNull(getClass().getResourceAsStream("westgate.png")));
+    Image ngara = new Image(Objects.requireNonNull(getClass().getResourceAsStream("Ngara.png")));
+    Image town = new Image(Objects.requireNonNull(getClass().getResourceAsStream("Town.png")));
+    Image tmall = new Image(Objects.requireNonNull(getClass().getResourceAsStream("T-mall.png")));
+    Image bus_coaster = new Image(Objects.requireNonNull(getClass().getResourceAsStream("coaster.jpg")));
+    Image big_bus = new Image(Objects.requireNonNull(getClass().getResourceAsStream("bigbus.jpeg")));
+    HBox layout = new HBox(10);
+    VBox navbar = new VBox(20);
+    Button adminbtn = new Button("");
+    Button profilebtn = new Button("");
+    Button homebtn = new Button("");
+    Button dashbtn = new Button("");
+    ImageView img = new ImageView(westgate);
+    ImageView bus1 = new ImageView(bus_coaster);
+    ImageView houseI = new ImageView(houseIcon);
+    ImageView dashI = new ImageView(dashIcon);
+    ImageView userI = new ImageView(userIcon);
+    ImageView saveI = new ImageView(saveIcon);
+    ImageView circleuserI = new ImageView(circleuserIcon);
+    DropShadow ds = new DropShadow();
 
     public void message_box(String error_type, String button_text){
         Dialog<String> dialog = new Dialog<String>();
@@ -42,6 +65,89 @@ public class Home extends Application {
         ButtonType type = new ButtonType(button_text, ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().add(type);
         dialog.show();
+    }
+
+
+    public void Profile(ActionEvent event)throws IOException{
+        HBox layout = new HBox(5);
+        VBox container = new VBox(5);
+        HBox description = new HBox(100);
+        HBox orders = new HBox(10);
+
+
+        //Components for Description
+        Label name = new Label("Mtume Owino Mutere");
+        Label ad_no = new Label("188916");
+        Label role = new Label("Admin");
+        Button logoutbtn = new Button("Logout");
+        Button reservebtn = new Button("Reserve");
+        description.getChildren().addAll(name, ad_no, role, reservebtn, logoutbtn);
+        description.setAlignment(Pos.CENTER);
+        description.setEffect(ds);
+        orders.setEffect(ds);
+
+
+
+        //Components for orders
+        VBox innerorder = new VBox(5);
+        Label orderlbl = new Label("Previous orders");
+        HBox tableheader = new HBox(100);
+        Label datelbl = new Label("Date");
+        Label stagelbl = new Label("Stage");
+        Label destinationlbl = new Label("Destination");
+        Label buscodelbl = new Label("Bus code");
+        Label timelbl = new Label("Time");
+        tableheader.getChildren().addAll(datelbl, stagelbl, destinationlbl, buscodelbl, timelbl);
+        innerorder.getChildren().addAll(orderlbl, tableheader);
+        orders.getChildren().addAll(innerorder);
+
+        //Styling
+        name.setStyle("-fx-font-size: 20;");
+        logoutbtn.setStyle("-fx-background-color: red;");
+
+        ds.setOffsetY(2.0f);
+        ds.setOffsetX(2.0f);
+        ds.setColor(Color.BLACK);
+
+        homebtn.setGraphic(houseI);
+        profilebtn.setGraphic(userI);
+        dashbtn.setGraphic(dashI);
+
+        houseI.setFitHeight(20);
+        houseI.setFitWidth(20);
+        dashI.setFitHeight(20);
+        dashI.setFitWidth(20);
+        userI.setFitWidth(20);
+        userI.setFitHeight(20);
+        saveI.setFitWidth(20);
+        saveI.setFitHeight(20);
+
+        description.setPrefWidth(1300);
+        orders.setPrefWidth(1300);
+        description.setPrefHeight(200);
+        orders.setPrefHeight(800);
+
+
+        navbar.setAlignment(Pos.CENTER);
+        navbar.setPadding(new Insets(20));
+        layout.setPadding(new Insets(20));
+        description.setPadding(new Insets(20));
+        orders.setPadding(new Insets(20));
+
+
+
+
+
+        navbar.getChildren().addAll(adminbtn, profilebtn, homebtn, dashbtn);
+        description.setStyle("-fx-border-radius: 5px; -fx-background-radius: 5px; -fx-border-color: #e0e0e0; -fx-border-width: 1px;-fx-background-color: #e0e0e0;");
+        orders.setStyle("-fx-border-radius: 5px; -fx-background-radius: 5px; -fx-border-color: #e0e0e0; -fx-border-width: 1px;-fx-background-color: #e0e0e0;");
+        layout.setStyle("-fx-background-color: #030f0f");
+
+        container.getChildren().addAll(description, orders);
+        layout.getChildren().addAll(navbar, container);
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage.setTitle("Dashboard");
+        stage.getScene().setRoot(layout);
     }
 
     public void Register(ActionEvent event) throws IOException {
@@ -67,30 +173,17 @@ public class Home extends Application {
 
 
     public void Dashboard(ActionEvent event) throws IOException {
-        //Resources
-        Image westgate = new Image(Objects.requireNonNull(getClass().getResourceAsStream("westgate.png")));
-        Image ngara = new Image(Objects.requireNonNull(getClass().getResourceAsStream("Ngara.png")));
-        Image town = new Image(Objects.requireNonNull(getClass().getResourceAsStream("Town.png")));
-        Image tmall = new Image(Objects.requireNonNull(getClass().getResourceAsStream("T-mall.png")));
-
-        //Bus-Images
-        Image bus_coaster = new Image(Objects.requireNonNull(getClass().getResourceAsStream("coaster.jpg")));
-        Image big_bus = new Image(Objects.requireNonNull(getClass().getResourceAsStream("bigbus.jpeg")));
-
-
-        //Icons
-        Image houseIcon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("house.png")));
-        Image userIcon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("user.png")));
-        Image saveIcon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("save.png")));
-
+        DB db = new DB();
+        Connection conn = db.connect_to_db("Bus-Reservation-System", "postgres", "");
+        db.getBus(conn, event);
 
         //Arrays
         String[] locations = { "Westgate", "T-Mall", "Galleria", "Town", "Ngara" };
         String[] seats = { "s1", "s2", "s3", "s4", "s5", "s6", "s7" };
         String[] times = { "8:00am", "9:00am", "10:00am", "11:00am" };
 
-        List<String> res = new ArrayList<String>();
 
+        List<String> res = new ArrayList<String>();
         //init arraylist
         res.add("LOCATION");
         res.add("TIME");
@@ -98,21 +191,15 @@ public class Home extends Application {
         System.out.println("Initialized array list: "+res);
 
         //components
-        HBox layout = new HBox(10);
         StackPane stackp = new StackPane();
         HBox cardContainer = new HBox(5);
         VBox cardDescription = new VBox(5);
         VBox resDescription = new VBox(5);
         HBox time_container = new HBox(5);
-        Button dbcheck = new Button("Db check");
         Button savebtn = new Button("Save");
-        Button adminbtn = new Button("");
-        Button profilebtn = new Button("");
-        Button homebtn = new Button("");
         CheckBox bookbus = new CheckBox("Book");
         HBox busheader = new HBox(480);
         HBox seat_container = new HBox(4);
-        VBox navbar = new VBox(20);
         HBox selectorMenu = new HBox(20);
         VBox container = new VBox(20);
         Label locationlbl = new Label("Select a location: ");
@@ -129,11 +216,7 @@ public class Home extends Application {
         ChoiceBox locationselector = new ChoiceBox(FXCollections.observableArrayList(locations));
         ChoiceBox seatselector = new ChoiceBox(FXCollections.observableArrayList(seats));
         ChoiceBox timeselector = new ChoiceBox(FXCollections.observableArrayList(times));
-        ImageView img = new ImageView(westgate);
-        ImageView bus1 = new ImageView(bus_coaster);
-        ImageView houseI = new ImageView(houseIcon);
-        ImageView userI = new ImageView(userIcon);
-        ImageView saveI = new ImageView(saveIcon);
+
 
 
         //styling, layout
@@ -147,18 +230,17 @@ public class Home extends Application {
         container.setPadding(new Insets(20));
         locationselector.setStyle("-fx-background-color: white;");
 
-        adminbtn.setStyle("-fx-background-color: #030f0f; -fx-text-fill: white");
-        profilebtn.setStyle("-fx-background-color: #030f0f; -fx-text-fill: white");
-        homebtn.setStyle("-fx-background-color: #030f0f; -fx-text-fill: white");
-        savebtn.setStyle("-fx-background-color: #030f0f; -fx-text-fill: white");
         adminbtn.setCursor(Cursor.HAND);
         profilebtn.setCursor(Cursor.HAND);
         homebtn.setCursor(Cursor.HAND);
+        dashbtn.setCursor(Cursor.HAND);
         savebtn.setCursor(Cursor.HAND);
+        dashI.setFitHeight(20);
+        dashI.setFitWidth(20);
 
 
         //navbar.setStyle("-fx-background-color:#03624c;");
-        layout.setStyle("-fx-background-color: #030f0f");
+        layout.setStyle("-fx-background-color: #030f0f;");
         buslbl.setStyle("-fx-font-size: 18px; -fx-text-fill: #030f0f;");
         bustext.setStyle("-fx-text-fill: #e0e0e0;");
         rating.setStyle("-fx-font-size: 18px; -fx-text-fill: #fdbf04;");
@@ -167,7 +249,6 @@ public class Home extends Application {
         timeselector.setEffect(ds);
         timeselector.setStyle("-fx-background-color: white;");
         //cardDescription.setStyle("-fx-background-color: black");
-
         cardContainer.setStyle("-fx-border-radius: 5px; -fx-background-radius: 5px; -fx-border-color: #e0e0e0; -fx-border-width: 1px;-fx-background-color: #e0e0e0;");
         cardDescription.setStyle("-fx-padding: 5px; -fx-border-insets: 5px;-fx-background-insets: 5px;");
 
@@ -193,16 +274,15 @@ public class Home extends Application {
         userI.setFitHeight(20);
         saveI.setFitWidth(20);
         saveI.setFitHeight(20);
-
         selectorMenu.setMaxWidth(300);
         selectorMenu.setMaxHeight(50);
         bustext.setWrappingWidth(600);
-
         cardDescription.setPrefHeight(100);
         cardDescription.setPrefWidth(100);
-
         bus1.setFitWidth(190);
         bus1.setFitHeight(120);
+
+        dashbtn.setGraphic(dashI);
 
         //Selectors
         locationselector.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
@@ -261,11 +341,7 @@ public class Home extends Application {
             }
         });
 
-        dbcheck.setOnAction(e->{
-            DB db = new DB();
-            Connection conn = db.connect_to_db("Bus-Reservation-System", "postgres", "");
-            db.getBus(conn, e);
-        });
+
 
 
         //loops to populate components
@@ -304,8 +380,6 @@ public class Home extends Application {
         } );
         */
 
-
-
         //children
         savebtn.setGraphic(saveI);
         resDescription.getChildren().addAll(restext, locationlbl, seatlbl, timelbl, savebtn);
@@ -314,10 +388,7 @@ public class Home extends Application {
         busheader.getChildren().addAll(buslbl, bookbus);
         cardDescription.getChildren().addAll(busheader, rating, bustext);
         cardContainer.getChildren().addAll(bus1, cardDescription);
-
-        navbar.getChildren().addAll(adminbtn, profilebtn, homebtn, dbcheck);
-
-
+        navbar.getChildren().addAll(adminbtn, profilebtn, homebtn, dashbtn);
 
         selectorMenu.getChildren().add(locationselector);
         //selectorMenu.getChildren().add(seatlbl);

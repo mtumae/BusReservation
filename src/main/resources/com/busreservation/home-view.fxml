@@ -12,4 +12,5 @@
     <Button onAction="#Dashboard">Dashboard</Button>
     <Button onAction="#Register">Register</Button>
     <Button onAction="#Admin">Admin</Button>
+    <Button onAction="#Profile">Profile</Button>
 </VBox>

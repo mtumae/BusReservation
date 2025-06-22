@@ -44,7 +44,9 @@ public class DB{
             System.out.println("\nSeat:");
             System.out.println(seats);
             System.out.println("\nArrival time:");
-            System.out.println(seats);
+            System.out.println(arrival_time);
+            System.out.println("\nAlight time:");
+            System.out.println(alight_time);
 
         }catch (SQLException e) {
             throw new RuntimeException(e);
