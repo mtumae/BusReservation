@@ -74,7 +74,6 @@ public class Home extends Application {
         HBox description = new HBox(100);
         HBox orders = new HBox(10);
 
-
         //Components for Description
         Label name = new Label("Mtume Owino Mutere");
         Label ad_no = new Label("188916");
@@ -85,7 +84,6 @@ public class Home extends Application {
         description.setAlignment(Pos.CENTER);
         description.setEffect(ds);
         orders.setEffect(ds);
-
 
 
         //Components for orders
@@ -127,15 +125,11 @@ public class Home extends Application {
         description.setPrefHeight(200);
         orders.setPrefHeight(800);
 
-
         navbar.setAlignment(Pos.CENTER);
         navbar.setPadding(new Insets(20));
         layout.setPadding(new Insets(20));
         description.setPadding(new Insets(20));
         orders.setPadding(new Insets(20));
-
-
-
 
 
         navbar.getChildren().addAll(adminbtn, profilebtn, homebtn, dashbtn);
@@ -146,7 +140,7 @@ public class Home extends Application {
         container.getChildren().addAll(description, orders);
         layout.getChildren().addAll(navbar, container);
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        stage.setTitle("Dashboard");
+        stage.setTitle("Profile");
         stage.getScene().setRoot(layout);
     }
 
@@ -172,15 +166,18 @@ public class Home extends Application {
     }
 
 
-    public void Dashboard(ActionEvent event) throws IOException {
+    public void populateDashboard(ActionEvent event, String ad_no){
         DB db = new DB();
         Connection conn = db.connect_to_db("Bus-Reservation-System", "postgres", "");
-        db.getBus(conn, event);
+        db.getBus(conn, event, ad_no);
+    }
 
+
+    public void Dashboard(ActionEvent event, ArrayList locations, ArrayList seats, ArrayList times, String ad_no) throws IOException {
         //Arrays
-        String[] locations = { "Westgate", "T-Mall", "Galleria", "Town", "Ngara" };
-        String[] seats = { "s1", "s2", "s3", "s4", "s5", "s6", "s7" };
-        String[] times = { "8:00am", "9:00am", "10:00am", "11:00am" };
+//        String[] locations = { "Westgate", "T-Mall", "Galleria", "Town", "Ngara" };
+//        String[] seats = { "s1", "s2", "s3", "s4", "s5", "s6", "s7" };
+//        String[] times = { "8:00am", "9:00am", "10:00am", "11:00am" };
 
 
         List<String> res = new ArrayList<String>();
@@ -219,10 +216,8 @@ public class Home extends Application {
 
 
 
-        //styling, layout
         navbar.setAlignment(Pos.CENTER);
         ds.setColor(Color.GRAY);
-        //layout.setStyle("-fx-background-color: #101820;");
 
         navbar.setPadding(new Insets(20));
         layout.setPadding(new Insets(10));
@@ -239,7 +234,6 @@ public class Home extends Application {
         dashI.setFitWidth(20);
 
 
-        //navbar.setStyle("-fx-background-color:#03624c;");
         layout.setStyle("-fx-background-color: #030f0f;");
         buslbl.setStyle("-fx-font-size: 18px; -fx-text-fill: #030f0f;");
         bustext.setStyle("-fx-text-fill: #e0e0e0;");
@@ -248,18 +242,13 @@ public class Home extends Application {
         seatselector.setEffect(ds);
         timeselector.setEffect(ds);
         timeselector.setStyle("-fx-background-color: white;");
-        //cardDescription.setStyle("-fx-background-color: black");
         cardContainer.setStyle("-fx-border-radius: 5px; -fx-background-radius: 5px; -fx-border-color: #e0e0e0; -fx-border-width: 1px;-fx-background-color: #e0e0e0;");
         cardDescription.setStyle("-fx-padding: 5px; -fx-border-insets: 5px;-fx-background-insets: 5px;");
-
-        //cardDescription.setEffect(ds);
         layout.setAlignment(Pos.CENTER);
         container.setStyle("-fx-background-color: #e0e0e0; -fx-border-radius: 25px; -fx-background-radius: 5px;");
         resDescription.setStyle("-fx-background-color: #e0e0e0; -fx-border-radius: 25px; -fx-background-radius: 5px;");
         locationselector.setPrefWidth(500);
         cardContainer.setEffect(ds);
-        //container.setEffect(ds);
-        //resDescription.setEffect(ds);
         seatselector.setMaxWidth(300);
         seatselector.setEffect(ds);
         timeselector.setMaxWidth(300);
@@ -290,8 +279,8 @@ public class Home extends Application {
             public void changed(ObservableValue ov, Number value, Number new_value)
             {
                 // set the text for the label to the selected item
-                System.out.println("Selecting "+locations[new_value.intValue()]);
-                locationlbl.setText(locations[new_value.intValue()] + " selected");
+                System.out.println("Selecting "+ locations.get(new_value.intValue()));
+                locationlbl.setText(locations.get(new_value.intValue()) + " selected");
                 locationlbl.setStyle("-fx-text-fill: green;");
             }
         });
@@ -320,39 +309,34 @@ public class Home extends Application {
             public void changed(ObservableValue ov, Number value, Number new_value)
             {
                 // set the text for the label to the selected item
-                System.out.println("Selecting "+seats[new_value.intValue()]);
-                seatlbl.setText(seats[new_value.intValue()]+" selected.");
+                System.out.println("Selecting "+ seats.get(new_value.intValue()));
+                seatlbl.setText(seats.get(new_value.intValue()) +" selected.");
                 seatlbl.setStyle("-fx-text-fill: green;");
-                res.set(2, seats[new_value.intValue()]);
+                res.set(2, (String) seats.get(new_value.intValue()));
                 System.out.println("Updated array: "+res);
             }
         });
 
         timeselector.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-            // if the item of the list is changed
             public void changed(ObservableValue ov, Number value, Number new_value)
             {
-                // set the text for the label to the selected item
-                System.out.println("Selecting "+times[new_value.intValue()]);
-                timelbl.setText(times[new_value.intValue()]+" selected.");
+                System.out.println("Selecting "+ times.get(new_value.intValue()));
+                timelbl.setText(times.get(new_value.intValue()) +" selected.");
                 timelbl.setStyle("-fx-text-fill: green;");
-                res.set(1, times[new_value.intValue()]);
+                res.set(1, (String) times.get(new_value.intValue()));
                 System.out.println("Updated array: "+res);
             }
         });
 
 
-
-
-        //loops to populate components
-        for(int i =0; i<times.length;i++){
-            Button time_btn = new Button(times[i]);
-            time_container.getChildren().add(time_btn);
-        }
-        for(int i =0; i<10;i++){
-            Button _btn = new Button("s"+i);
-            seat_container.getChildren().add(_btn);
-        }
+        //Button events
+        savebtn.setOnAction(e->{
+            try{
+                //db.addReservation(conn, e, );
+            } catch (Exception ex) {
+                throw new RuntimeException(ex.getCause());
+            }
+        });
 
         /*
         adminbtn.setOnAction(e->{
@@ -391,21 +375,15 @@ public class Home extends Application {
         navbar.getChildren().addAll(adminbtn, profilebtn, homebtn, dashbtn);
 
         selectorMenu.getChildren().add(locationselector);
-        //selectorMenu.getChildren().add(seatlbl);
-        //selectorMenu.getChildren().add(seatselector);
-        //selectorMenu.getChildren().add(timelbl);
-        //selectorMenu.getChildren().add(timeselector);
-        //container.getChildren().add(locationlbl);
         stackp.getChildren().addAll(img, selectorMenu);
         StackPane.setAlignment(selectorMenu, Pos.BOTTOM_CENTER);
         container.getChildren().add(stackp);
         container.getChildren().add(cardContainer);
-        //container.getChildren().add(selectorMenu);
-        //container.getChildren().add(time_container);
-        //container.getChildren().add(seat_container);
         layout.getChildren().add(navbar);
         layout.getChildren().add(container);
         layout.getChildren().add(resDescription);
+
+
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setTitle("Dashboard");
         stage.getScene().setRoot(layout);

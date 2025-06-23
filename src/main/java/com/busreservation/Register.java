@@ -22,7 +22,7 @@ public class Register extends Home{
 
     @FXML
     private Label welcomeText;
-    public TextField name, ad_no, pass1, pass2;
+    public TextField name, ad_no, fname, lname, email, pass1, pass2;
 
     public void Signin(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("signin-view.fxml")));
@@ -31,10 +31,6 @@ public class Register extends Home{
         stage.getScene().setRoot(root);
     }
 
-    @Override
-    public void Dashboard(ActionEvent event) throws IOException {
-        super.Dashboard(event);
-    }
     public void RegisterButtonClick(ActionEvent event) throws IOException {
         //validation
         if (Objects.equals(ad_no.getText(), "") || Objects.equals(pass1.getText(), "") || Objects.equals(name.getText(), "")){
@@ -54,6 +50,10 @@ public class Register extends Home{
         } else{
             System.out.println("Logged user: " + name.getText());
             message_box("User "+ ad_no.getText() +" created", "Ok");
+
+            DB db = new DB();
+            Connection conn = db.connect_to_db("Bus-Reservation-System", "postgres", "");
+            db.createUser(conn, event, ad_no.getText(), fname.getText(), lname.getText(), email.getText());
 
             //add data to db
 

@@ -20,6 +20,12 @@
         <TextField fx:id="name"  />
         <Label>Admission number</Label>
         <TextField fx:id="ad_no"/>
+        <Label>First name</Label>
+        <TextField fx:id="fname"/>
+        <Label>Last name</Label>
+        <TextField fx:id="lname"/>
+        <Label>Email</Label>
+        <TextField fx:id="email"/>
         <Label>Password</Label>
         <PasswordField fx:id="pass1"/>
         <Label>Password confirmation</Label>
@@ -31,7 +37,7 @@
             Already have an account? Register.
         </Button>
         <Button onAction="#RegisterButtonClick" maxWidth="600">Register</Button>
-        <Button onAction="#Dashboard" maxWidth="600">Dashboard</Button>
+        <Button onAction="#" maxWidth="600">Dashboard</Button>
     </VBox>
 
 </VBox>

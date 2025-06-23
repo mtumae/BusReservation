@@ -9,7 +9,7 @@
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
     <Label>Welcome to the Bus reservation system</Label>
-    <Button onAction="#Dashboard">Dashboard</Button>
+    <Button onAction="#populateDashboard">Dashboard</Button>
     <Button onAction="#Register">Register</Button>
     <Button onAction="#Admin">Admin</Button>
     <Button onAction="#Profile">Profile</Button>
