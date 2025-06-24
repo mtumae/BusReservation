@@ -83,7 +83,7 @@ public class DB extends Home{
     }
 
 
-    void getBus(Connection conn, ActionEvent event, String ad_no){
+    void getBus(Connection conn, ActionEvent event){
         ArrayList<String> bus_id = new ArrayList<>();
         ArrayList<String> bus_type = new ArrayList<>();
         ArrayList<String> seats = new ArrayList<>();
@@ -112,7 +112,7 @@ public class DB extends Home{
             System.out.println(arrival_time);
             System.out.println("\nAlight time:");
             System.out.println(alight_time);
-            Dashboard(event, stage, seats, arrival_time,ad_no);
+            Dashboard(event, bus_type, stage, seats, arrival_time);
         }catch (SQLException | IOException e) {
             throw new RuntimeException(e.getCause());
         };

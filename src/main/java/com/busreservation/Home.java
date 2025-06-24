@@ -41,8 +41,8 @@ public class Home extends Application {
     Image ngara = new Image(Objects.requireNonNull(getClass().getResourceAsStream("Ngara.png")));
     Image town = new Image(Objects.requireNonNull(getClass().getResourceAsStream("Town.png")));
     Image tmall = new Image(Objects.requireNonNull(getClass().getResourceAsStream("T-mall.png")));
-    Image bus_coaster = new Image(Objects.requireNonNull(getClass().getResourceAsStream("coaster.jpg")));
-    Image big_bus = new Image(Objects.requireNonNull(getClass().getResourceAsStream("bigbus.jpeg")));
+    Image busIcon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("bus.png")));
+    Image vanIcon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("van.png")));
     HBox layout = new HBox(10);
     VBox navbar = new VBox(20);
     Button adminbtn = new Button("");
@@ -50,7 +50,8 @@ public class Home extends Application {
     Button homebtn = new Button("");
     Button dashbtn = new Button("");
     ImageView img = new ImageView(westgate);
-    ImageView bus1 = new ImageView(bus_coaster);
+    ImageView busI = new ImageView(busIcon);
+    ImageView vanI = new ImageView(vanIcon);
     ImageView houseI = new ImageView(houseIcon);
     ImageView dashI = new ImageView(dashIcon);
     ImageView userI = new ImageView(userIcon);
@@ -166,19 +167,15 @@ public class Home extends Application {
     }
 
 
-    public void populateDashboard(ActionEvent event, String ad_no){
+    public void populateDashboard(ActionEvent event){
         DB db = new DB();
         Connection conn = db.connect_to_db("Bus-Reservation-System", "postgres", "");
-        db.getBus(conn, event, ad_no);
+        db.getBus(conn, event);
     }
 
 
-    public void Dashboard(ActionEvent event, ArrayList locations, ArrayList seats, ArrayList times, String ad_no) throws IOException {
+    public void Dashboard(ActionEvent event, ArrayList bus_type, ArrayList locations, ArrayList seats, ArrayList times) throws IOException {
         //Arrays
-//        String[] locations = { "Westgate", "T-Mall", "Galleria", "Town", "Ngara" };
-//        String[] seats = { "s1", "s2", "s3", "s4", "s5", "s6", "s7" };
-//        String[] times = { "8:00am", "9:00am", "10:00am", "11:00am" };
-
 
         List<String> res = new ArrayList<String>();
         //init arraylist
@@ -189,8 +186,7 @@ public class Home extends Application {
 
         //components
         StackPane stackp = new StackPane();
-        HBox cardContainer = new HBox(5);
-        VBox cardDescription = new VBox(5);
+        VBox cardSection = new VBox(5);
         VBox resDescription = new VBox(5);
         HBox time_container = new HBox(5);
         Button savebtn = new Button("Save");
@@ -202,9 +198,6 @@ public class Home extends Application {
         Label locationlbl = new Label("Select a location: ");
         Label seatlbl = new Label("Select a seat: ");
         Label timelbl = new Label("Select a time: ");
-        Label buslbl = new Label("Coaster");
-        Text rating = new Text("⭐⭐⭐⭐");
-        Text bustext = new Text("Compact, mid-sized minibus designed to seat around 22–30 passengers. It has a boxy shape with large windows, dual rear wheels for stability, and typically features a sliding passenger door. Inside, it offers rows of forward-facing seats with a narrow center aisle, and may include air conditioning.");
         Text restext = new Text("Start clicking stuff to generate a receipt");
         DropShadow ds = new DropShadow();
 
@@ -235,26 +228,26 @@ public class Home extends Application {
 
 
         layout.setStyle("-fx-background-color: #030f0f;");
-        buslbl.setStyle("-fx-font-size: 18px; -fx-text-fill: #030f0f;");
-        bustext.setStyle("-fx-text-fill: #e0e0e0;");
-        rating.setStyle("-fx-font-size: 18px; -fx-text-fill: #fdbf04;");
         seatselector.setStyle("-fx-background-color: white;");
         seatselector.setEffect(ds);
         timeselector.setEffect(ds);
         timeselector.setStyle("-fx-background-color: white;");
-        cardContainer.setStyle("-fx-border-radius: 5px; -fx-background-radius: 5px; -fx-border-color: #e0e0e0; -fx-border-width: 1px;-fx-background-color: #e0e0e0;");
-        cardDescription.setStyle("-fx-padding: 5px; -fx-border-insets: 5px;-fx-background-insets: 5px;");
+        cardSection.setStyle("-fx-padding: 5px; -fx-border-insets: 5px;-fx-background-insets: 5px;-fx-border-radius: 5px; -fx-background-radius: 5px; -fx-border-color: #e0e0e0; -fx-border-width: 1px;-fx-background-color: #e0e0e0;");
         layout.setAlignment(Pos.CENTER);
         container.setStyle("-fx-background-color: #e0e0e0; -fx-border-radius: 25px; -fx-background-radius: 5px;");
         resDescription.setStyle("-fx-background-color: #e0e0e0; -fx-border-radius: 25px; -fx-background-radius: 5px;");
         locationselector.setPrefWidth(500);
-        cardContainer.setEffect(ds);
+        cardSection.setEffect(ds);
         seatselector.setMaxWidth(300);
         seatselector.setEffect(ds);
         timeselector.setMaxWidth(300);
         timeselector.setEffect(ds);
         img.setFitWidth(800);
         img.setFitHeight(300);
+        busI.setFitWidth(190);
+        busI.setFitHeight(120);
+        busI.setFitWidth(190);
+        vanI.setFitWidth(190);
 
         //Button Icons
         houseI.setFitHeight(20);
@@ -265,11 +258,9 @@ public class Home extends Application {
         saveI.setFitHeight(20);
         selectorMenu.setMaxWidth(300);
         selectorMenu.setMaxHeight(50);
-        bustext.setWrappingWidth(600);
-        cardDescription.setPrefHeight(100);
-        cardDescription.setPrefWidth(100);
-        bus1.setFitWidth(190);
-        bus1.setFitHeight(120);
+        cardSection.setPrefHeight(100);
+        cardSection.setPrefWidth(100);
+
 
         dashbtn.setGraphic(dashI);
 
@@ -328,6 +319,31 @@ public class Home extends Application {
             }
         });
 
+        //populating content
+        for(int i=0;i<bus_type.size();i++){
+            //Components
+            Label cardlbl = new Label((String) bus_type.get(i)); //should be bus id
+            Text desc = new Text((String) seats.get(i)+" seats"+" "+(String) times.get(i));
+            VBox card = new VBox(5);
+
+            //Styling
+            cardlbl.setStyle("-fx-font-size: 18px;");
+            desc.setStyle("-fx-font-size:10px;");
+            card.setStyle("-fx-background-color: #e0e0e0; -fx-border-radius: 25px; -fx-background-radius: 5px;");
+            card.setPadding(new Insets(20));
+
+
+            if(bus_type.get(i)=="van"){
+                card.getChildren().add(vanI);
+            } else if (bus_type.get(i)=="bus") {
+                card.getChildren().add(busI);
+            }
+
+            //Population
+            card.getChildren().addAll(cardlbl, desc);
+            cardSection.getChildren().add(card);
+        }
+
 
         //Button events
         savebtn.setOnAction(e->{
@@ -369,16 +385,15 @@ public class Home extends Application {
         resDescription.getChildren().addAll(restext, locationlbl, seatlbl, timelbl, savebtn);
         homebtn.setGraphic(houseI);
         profilebtn.setGraphic(userI);
-        busheader.getChildren().addAll(buslbl, bookbus);
-        cardDescription.getChildren().addAll(busheader, rating, bustext);
-        cardContainer.getChildren().addAll(bus1, cardDescription);
+        //busheader.getChildren().addAll(bookbus);
+        // cardDescription.getChildren().addAll(busheader, rating, bustext);
+        //cardContainer.getChildren().addAll(cardDescription);
         navbar.getChildren().addAll(adminbtn, profilebtn, homebtn, dashbtn);
-
         selectorMenu.getChildren().add(locationselector);
         stackp.getChildren().addAll(img, selectorMenu);
         StackPane.setAlignment(selectorMenu, Pos.BOTTOM_CENTER);
         container.getChildren().add(stackp);
-        container.getChildren().add(cardContainer);
+        container.getChildren().add(cardSection);
         layout.getChildren().add(navbar);
         layout.getChildren().add(container);
         layout.getChildren().add(resDescription);
