@@ -1,18 +1,16 @@
 package com.busreservation;
 import javafx.event.ActionEvent;
 
-import javax.swing.plaf.nimbus.State;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class DB extends Home{
     public Connection connect_to_db(String dbname, String user, String pass) {
         Connection conn = null;
         try {
             Class.forName("org.postgresql.Driver");
-            conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/" + dbname, user, pass);
+             conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/OOP_II-Project" + "OOP_II-Project", "postgres", "admin123");
             if (conn != null) {
                 System.out.println("Connection established");
             } else {
@@ -31,10 +29,9 @@ public class DB extends Home{
         ArrayList<String> admission_no = new ArrayList<>();
         ArrayList<String> busId = new ArrayList<>();
         ArrayList<String> submittedOn = new ArrayList<>();
-        Statement statement;
-        try{
-            String query = "select * from Reservations";
-            statement = conn.createStatement();
+
+        try(Statement statement = conn.createStatement()){
+            String query = "select * from Reservation";
             ResultSet result = statement.executeQuery(query);
             while(result.next()){
                 admission_no.add(result.getString("admission_number"));
@@ -83,7 +80,7 @@ public class DB extends Home{
     }
 
 
-    void getBus(Connection conn, ActionEvent event, String ad_no){
+    void getBus(Connection conn, ActionEvent event){
         ArrayList<String> bus_id = new ArrayList<>();
         ArrayList<String> bus_type = new ArrayList<>();
         ArrayList<String> seats = new ArrayList<>();
@@ -112,7 +109,7 @@ public class DB extends Home{
             System.out.println(arrival_time);
             System.out.println("\nAlight time:");
             System.out.println(alight_time);
-            Dashboard(event, stage, seats, arrival_time,ad_no);
+            Dashboard(event, bus_type, stage, seats, arrival_time);
         }catch (SQLException | IOException e) {
             throw new RuntimeException(e.getCause());
         };
@@ -140,7 +137,7 @@ public class DB extends Home{
     }
 
 
-    void checkUser(Connection conn, ActionEvent event, String ad_no){
+    boolean checkUser(Connection conn, String event, String ad_no){
         Statement statement;
         try {
             String query = "select * from Students where ad_no='" + ad_no + "' limit 1;";
@@ -159,6 +156,7 @@ public class DB extends Home{
             System.out.println(e);
         }
 
+        return false;
     }
 
 
@@ -171,7 +169,7 @@ public class DB extends Home{
         ArrayList<String> submittedOn = new ArrayList<>();
         Statement statement;
         try {
-            String query = "select * from Reservations left outer join Users using (ad_no) right outer join";
+            String query = "select * from Reservation left outer join Users using (ad_no) right outer join";
             statement = conn.createStatement();
             ResultSet result = statement.executeQuery(query);
             while(result.next()){
@@ -182,7 +180,6 @@ public class DB extends Home{
             throw new RuntimeException(e.getCause());
         }
     }
-
 
     //---------------------------------------------------------------------------------------
     // INSERT

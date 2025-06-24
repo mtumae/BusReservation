@@ -28,4 +28,10 @@ A JavaFX-based desktop application for managing bus reservations. Users can log 
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/mtumae/BusReservation.git
+   git clone https://github.com/mtumae/BusReservation
+
+
+---
+**Resources**
+- <a href="https://www.flaticon.com/free-icons/vans" title="vans icons">Vans icons created by Freepik - Flaticon</a>
+- <a href="https://www.flaticon.com/free-icons/bus" title="bus icons">Bus icons created by Hight Quality Icons - Flaticon</a>
