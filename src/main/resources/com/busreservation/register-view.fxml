@@ -16,8 +16,6 @@
         <padding>
             <Insets right="50.0" bottom="50.0" left="50.0" top="50.0"/>
         </padding>
-        <Label>Register an account</Label>
-        <TextField fx:id="name"  />
         <Label>Admission number</Label>
         <TextField fx:id="ad_no"/>
         <Label>First name</Label>
@@ -30,14 +28,14 @@
         <PasswordField fx:id="pass1"/>
         <Label>Password confirmation</Label>
         <PasswordField fx:id="pass2"/>
-        <Button maxWidth="600" onAction="#Signin" style="-fx-background-color: none;" underline="true">
+        <Button maxWidth="600" onAction="#Signin" style="-fx-text-fill: black;" underline="true">
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor>
             Already have an account? Register.
         </Button>
-        <Button onAction="#RegisterButtonClick" maxWidth="600">Register</Button>
-        <Button onAction="#" maxWidth="600">Dashboard</Button>
+        <Button onAction="#registerUser" maxWidth="600">Register</Button>
+
     </VBox>
 
 </VBox>

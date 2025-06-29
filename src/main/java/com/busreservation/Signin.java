@@ -24,27 +24,16 @@ public class Signin extends Home{
 
 
     //Sign in button click
-        public void handleSignIn(ActionEvent event) throws IOException {
-            if (ad_no.getText().isEmpty() || pass.getText().isEmpty()) {
-                message_box("Please enter admission number and password", "OK");
-                return;
-            }
+    public void singIn(ActionEvent event) throws IOException {
+        //PUT VALIDATION HERE PLEASE
+        DB db = new DB();
+        Connection conn = db.connect_to_db("Bus-Reservation-System", "postgres", "");
+        db.checkUser(conn, event, ad_no.getText(), pass.getText());
 
-            DB db = new DB();
-            try (Connection conn = db.connect_to_db("OOP_II-Project", "postgres", "admin123")) {
-                if (db.checkUser(conn, ad_no.getText(), pass.getText())) {
-                    Dashboard dashboard = new Dashboard();
-                    dashboard.start(new Stage());
-                    ((Stage)((javafx.scene.Node)event.getSource()).getScene().getWindow()).close();
-                } else {
-                    message_box("Invalid admission number or password", "OK");
-                }
-            } catch (Exception e) {
-                message_box("Error connecting to database", "OK");
-                e.printStackTrace();
-            }
-        }
     }
 
+
+
+}
 
 

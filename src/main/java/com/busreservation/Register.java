@@ -22,7 +22,7 @@ public class Register extends Home{
 
     @FXML
     private Label welcomeText;
-    public TextField name, ad_no, fname, lname, email, pass1, pass2;
+    public TextField  ad_no, fname, lname, email, pass1, pass2;
 
     public void Signin(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("signin-view.fxml")));
@@ -31,9 +31,11 @@ public class Register extends Home{
         stage.getScene().setRoot(root);
     }
 
-    public void RegisterButtonClick(ActionEvent event) throws IOException {
+    public void registerUser(ActionEvent event) throws IOException {
+        DB db = new DB();
+        Connection conn = db.connect_to_db("Bus-Reservation-System", "postgres", "");
         //validation
-        if (Objects.equals(ad_no.getText(), "") || Objects.equals(pass1.getText(), "") || Objects.equals(name.getText(), "")){
+        if (Objects.equals(ad_no.getText(), "") || Objects.equals(pass1.getText(), "") || Objects.equals(fname.getText(), "")|| Objects.equals(lname.getText(), "")){
             System.out.println("Ensure you have entered data into all fields");
             message_box("Invalid data! Ensure you have entered correct data into all fields","Try again");
 
@@ -48,25 +50,8 @@ public class Register extends Home{
             System.out.println("Passwords do not match! Try again");
             message_box("Passwords do not match! Try again!","Ok");
         } else{
-            System.out.println("Logged user: " + name.getText());
-            message_box("User "+ ad_no.getText() +" created", "Ok");
-
-            DB db = new DB();
-            Connection conn = db.connect_to_db("Bus-Reservation-System", "postgres", "");
-            db.createUser(conn, event, ad_no.getText(), fname.getText(), lname.getText(), email.getText());
-
-            //add data to db
-
+            db.createUser(conn, event, ad_no.getText(), fname.getText(), lname.getText(), email.getText(), pass1.getText());
         }}
 
-    @Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Home.class.getResource("register-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("style.css")).toExternalForm());
-        stage.setTitle("Hello!");
-        stage.setMaximized(true);
-        stage.setScene(scene);
-        stage.show();
-    }
+
 }
