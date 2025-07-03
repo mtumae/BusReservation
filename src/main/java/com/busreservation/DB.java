@@ -48,7 +48,6 @@ public class DB extends Home{
         ArrayList<String> seats = new ArrayList<>();
         ArrayList<String> arrivaltime = new ArrayList<>();
         ArrayList<String> alighttime = new ArrayList<>();
-
         try{
             String query = "select * from Bus";
             statement = conn.createStatement();
@@ -153,38 +152,6 @@ public class DB extends Home{
         }
     }
 
-    /*
-    ArrayList<String> getBusByStage(Connection conn, ActionEvent event, String stage){
-        ArrayList<ArrayList<String>> busdetails = new ArrayList<>();
-        ArrayList<String> busid = new ArrayList<>();
-        ArrayList<String> bus_type = new ArrayList<>();
-        ArrayList<Integer> seats = new ArrayList<>();
-        ArrayList<String> arrival_time = new ArrayList<>();
-        ArrayList<String> alight_time = new ArrayList<>();
-        Statement;
-        try{
-            String query = "select * from Bus where bus_id='"+stage+"';";
-            statement = conn.createStatement();
-            ResultSet result = statement.executeQuery(query);
-            while(result.next()){
-                busid.add(result.getString("bus_id"));
-                bus_type.add(result.getString("bus_type"));
-                seats.add(result.getInt("seats"));
-                arrival_time.add(result.getString("arrival_time"));
-                alight_time.add(result.getString("alight_time"));
-            }
-            busdetails.add(busid);
-            busdetails.add(bus_type);
-            busdetails.add(seats);
-            busdetails.add(arrival_time);
-            busdetails.add(alight_time);
-
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-        return busdetails;
-    }
-*/
 
     void getBus(Connection conn, ActionEvent event, String ad_no){
         ArrayList<String> bus_id = new ArrayList<>();

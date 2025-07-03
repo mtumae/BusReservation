@@ -28,13 +28,15 @@
         <PasswordField fx:id="pass1"/>
         <Label>Password confirmation</Label>
         <PasswordField fx:id="pass2"/>
-        <Button maxWidth="600" onAction="#Signin" style="-fx-text-fill: black;" underline="true">
+        <VBox spacing="10">
+        <Button maxWidth="600" onAction="#Signin" style="-fx-background-color: none; -fx-text-fill:#030f0f" underline="true">
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor>
             Already have an account? Register.
         </Button>
         <Button onAction="#registerUser" maxWidth="600">Register</Button>
+        </VBox>
 
     </VBox>
 

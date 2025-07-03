@@ -10,6 +10,4 @@
     </padding>
     <Label>Welcome to the Bus reservation system</Label>
     <Button onAction="#Register">Register</Button>
-    <Button onAction="#Admin">Admin</Button>
-
 </VBox>

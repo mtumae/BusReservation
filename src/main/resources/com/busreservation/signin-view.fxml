@@ -18,12 +18,14 @@
         <TextField fx:id="ad_no" />
         <Label>Password</Label>
         <PasswordField fx:id="pass" />
-        <Button maxWidth="600" onAction="#Register" style="-fx-background-color: black;" underline="true">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-            Dont have an account? Register.
-        </Button>
-        <Button onAction="#singIn" maxWidth="600">Sign in</Button>
+        <VBox spacing="10">
+            <Button maxWidth="600" onAction="#Register" style="-fx-background-color: none; -fx-text-fill:#030f0f" underline="true">
+             <cursor>
+                <Cursor fx:constant="HAND" />
+             </cursor>
+                Dont have an account? Register.
+            </Button>
+            <Button onAction="#singIn" maxWidth="600">Sign in</Button>
+        </VBox>
     </VBox>
 </VBox>

@@ -203,6 +203,8 @@ public class Home extends Application {
         String[] bustypes = new String[]{"Van","Bus", "Coaster", "Large bus"};
 
 
+
+
         //Form for buses
         Label busformlbl = new Label("Buses");
         HBox bustableheader = new HBox(200);
